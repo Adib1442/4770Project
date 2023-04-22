@@ -128,7 +128,7 @@ public class PlayerControllerSniper : MonoBehaviour
         {
             ///Attack code here
             Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 40f, ForceMode.Impulse);
+            rb.AddForce(transform.forward * 35f, ForceMode.Impulse);
             rb.AddForce(transform.up * 3f, ForceMode.Impulse);
             ///End of attack code
 

@@ -33,11 +33,15 @@ public class PlayerControllerBlue : MonoBehaviour
     }
 
     private void UpdatePlayerTarget()
-    {
+    { 
+    GameObject RedSniper = GameObject.Find("RedSniper");
     GameObject Capsule = GameObject.Find("Capsule");
     if (Capsule != null)
     {
         player = Capsule.transform;
+    }else if (RedSniper != null ){
+        player = RedSniper.transform;
+
     }
     }
 
