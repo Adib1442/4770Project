@@ -28,12 +28,23 @@ public class PlayerControllerBlue : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("Capsule").transform;
+        //player = GameObject.Find("Capsule").transform;
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void UpdatePlayerTarget()
+    {
+    GameObject Capsule = GameObject.Find("Capsule");
+    if (Capsule != null)
+    {
+        player = Capsule.transform;
+    }
     }
 
     private void Update()
     {
+        UpdatePlayerTarget();
+        if(player != null){
         //Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -41,6 +52,7 @@ public class PlayerControllerBlue : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        }
     }
 
     private void Patroling()
@@ -75,6 +87,7 @@ public class PlayerControllerBlue : MonoBehaviour
 
     private void AttackPlayer()
     {
+
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
 
@@ -84,28 +97,19 @@ public class PlayerControllerBlue : MonoBehaviour
         {
             ///Attack code here
             Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 25f, ForceMode.Impulse);
+            rb.AddForce(transform.forward * 40f, ForceMode.Impulse);
             rb.AddForce(transform.up * 3f, ForceMode.Impulse);
             ///End of attack code
 
             alreadyAttacked = true;
+            
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
+             
         }
     }
     private void ResetAttack()
     {
         alreadyAttacked = false;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
-    }
-    private void DestroyEnemy()
-    {
-        Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()

@@ -7,7 +7,8 @@ public class CollisionScriptBlue : MonoBehaviour
     private void OnCollisionEnter(Collision collision){
         
         if(collision.gameObject.tag == "BulletBlue"){
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        gameObject.SetActive(false);
         }
     }
 }

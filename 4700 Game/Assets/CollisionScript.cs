@@ -7,7 +7,8 @@ public class CollisionScript : MonoBehaviour
     private void OnCollisionEnter(Collision collision){
         
         if(collision.gameObject.tag == "Bullet"){
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        gameObject.SetActive(false);
         }
     }
 }

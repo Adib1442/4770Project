@@ -2,11 +2,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerSniper : MonoBehaviour
 {
     public NavMeshAgent agent;
 
     public Transform player;
+    public Transform SniperPos;
+
     public Transform payload;
 
 
@@ -30,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        //player = GameObject.Find("PlayerObj").transform;
+        SniperPos = GameObject.Find("SniperPosition").transform;
         payload = GameObject.Find("Payload").transform;
         agent = GetComponent<NavMeshAgent>();
     }
@@ -58,11 +60,21 @@ public class PlayerController : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange && !payloadInSightRange && !payloadInEscortRange) Patroling();
         if (!playerInSightRange && !playerInAttackRange && payloadInSightRange && !payloadInEscortRange) Escort();
         if (!playerInSightRange && !playerInAttackRange && payloadInSightRange && payloadInEscortRange) Escorting();
+        if (playerInSightRange && !playerInAttackRange && payloadInSightRange && payloadInEscortRange) Escorting();
 
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+
+        if (playerInSightRange) MoveToSnipPos();
+
+        //if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
          }
     }
+
+    private void ChasePlayer()
+    {
+        agent.SetDestination(player.position);
+    }
+
 
     private void Escort()
     {
@@ -100,9 +112,9 @@ public class PlayerController : MonoBehaviour
             walkPointSet = true;
     }
 
-    private void ChasePlayer()
+    private void MoveToSnipPos()
     {
-        agent.SetDestination(player.position);
+        agent.SetDestination(SniperPos.position);
     }
 
     private void AttackPlayer()
