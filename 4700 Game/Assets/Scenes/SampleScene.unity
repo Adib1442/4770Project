@@ -260,16 +260,15 @@ MonoBehaviour:
   agent: {fileID: 183491828}
   player: {fileID: 1143419854}
   payload: {fileID: 318282058}
-  whatIsGround:
+  IsGround:
     serializedVersion: 2
     m_Bits: 512
-  whatIsPlayer:
+  IsPlayer:
     serializedVersion: 2
     m_Bits: 128
   IsPayload:
     serializedVersion: 2
     m_Bits: 4096
-  health: 120
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 8
   timeBetweenAttacks: 0.5
@@ -657,16 +656,15 @@ MonoBehaviour:
   agent: {fileID: 302220023}
   player: {fileID: 1143419854}
   payload: {fileID: 318282058}
-  whatIsGround:
+  IsGround:
     serializedVersion: 2
     m_Bits: 512
-  whatIsPlayer:
+  IsPlayer:
     serializedVersion: 2
     m_Bits: 128
   IsPayload:
     serializedVersion: 2
     m_Bits: 4096
-  health: 120
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 8
   timeBetweenAttacks: 0.5
@@ -939,16 +937,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 400471517}
   player: {fileID: 1228733716}
-  whatIsGround:
+  IsGround:
     serializedVersion: 2
     m_Bits: 512
-  whatIsPlayer:
+  IsPlayer:
     serializedVersion: 2
     m_Bits: 1024
-  health: 120
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 8
-  timeBetweenAttacks: 0.7
+  wp: {x: 0, y: 0, z: 0}
+  wpRange: 8
+  AttackDelay: 0.6
   projectile: {fileID: 1877045608950869354, guid: ce7422873ea5cce4f8fd15fdb560e0d9, type: 3}
   sightRange: 21
   attackRange: 15
@@ -1201,16 +1198,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 568441799}
   player: {fileID: 1228733716}
-  whatIsGround:
+  IsGround:
     serializedVersion: 2
     m_Bits: 512
-  whatIsPlayer:
+  IsPlayer:
     serializedVersion: 2
     m_Bits: 1024
-  health: 120
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 8
-  timeBetweenAttacks: 0.7
+  wp: {x: 0, y: 0, z: 0}
+  wpRange: 8
+  AttackDelay: 0.6
   projectile: {fileID: 1877045608950869354, guid: ce7422873ea5cce4f8fd15fdb560e0d9, type: 3}
   sightRange: 21
   attackRange: 15
@@ -1851,16 +1847,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1143419856}
   player: {fileID: 1228733716}
-  whatIsGround:
+  IsGround:
     serializedVersion: 2
     m_Bits: 512
-  whatIsPlayer:
+  IsPlayer:
     serializedVersion: 2
     m_Bits: 1024
-  health: 120
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 8
-  timeBetweenAttacks: 0.7
+  wp: {x: 0, y: 0, z: 0}
+  wpRange: 8
+  AttackDelay: 0.6
   projectile: {fileID: 1877045608950869354, guid: ce7422873ea5cce4f8fd15fdb560e0d9, type: 3}
   sightRange: 21
   attackRange: 15
@@ -2248,16 +2243,15 @@ MonoBehaviour:
   agent: {fileID: 1228733718}
   player: {fileID: 1143419854}
   payload: {fileID: 318282058}
-  whatIsGround:
+  IsGround:
     serializedVersion: 2
     m_Bits: 512
-  whatIsPlayer:
+  IsPlayer:
     serializedVersion: 2
     m_Bits: 128
   IsPayload:
     serializedVersion: 2
     m_Bits: 4096
-  health: 120
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 8
   timeBetweenAttacks: 0.5
@@ -2415,16 +2409,15 @@ MonoBehaviour:
   agent: {fileID: 1404366097}
   player: {fileID: 1143419854}
   payload: {fileID: 318282058}
-  whatIsGround:
+  IsGround:
     serializedVersion: 2
     m_Bits: 512
-  whatIsPlayer:
+  IsPlayer:
     serializedVersion: 2
     m_Bits: 128
   IsPayload:
     serializedVersion: 2
     m_Bits: 4096
-  health: 120
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 8
   timeBetweenAttacks: 0.5
@@ -2901,16 +2894,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1830056314}
   player: {fileID: 1228733716}
-  whatIsGround:
+  IsGround:
     serializedVersion: 2
     m_Bits: 512
-  whatIsPlayer:
+  IsPlayer:
     serializedVersion: 2
     m_Bits: 1024
-  health: 120
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 8
-  timeBetweenAttacks: 0.7
+  wp: {x: 0, y: 0, z: 0}
+  wpRange: 8
+  AttackDelay: 0.6
   projectile: {fileID: 1877045608950869354, guid: ce7422873ea5cce4f8fd15fdb560e0d9, type: 3}
   sightRange: 21
   attackRange: 15
@@ -3242,16 +3234,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 2053348042}
   player: {fileID: 1228733716}
-  whatIsGround:
+  IsGround:
     serializedVersion: 2
     m_Bits: 512
-  whatIsPlayer:
+  IsPlayer:
     serializedVersion: 2
     m_Bits: 1024
-  health: 120
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 8
-  timeBetweenAttacks: 0.7
+  wp: {x: 0, y: 0, z: 0}
+  wpRange: 8
+  AttackDelay: 0.6
   projectile: {fileID: 1877045608950869354, guid: ce7422873ea5cce4f8fd15fdb560e0d9, type: 3}
   sightRange: 21
   attackRange: 15

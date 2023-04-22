@@ -8,21 +8,16 @@ public class PlayerControllerBlue : MonoBehaviour
 
     public Transform player;
 
-    public LayerMask whatIsGround, whatIsPlayer;
+    public LayerMask IsGround, IsPlayer;
 
-    public float health;
+    public Vector3 wp;
+    bool wpSet;
+    public float wpRange;
 
-    //Patroling
-    public Vector3 walkPoint;
-    bool walkPointSet;
-    public float walkPointRange;
-
-    //Attacking
-    public float timeBetweenAttacks;
+    public float AttackDelay;
     bool alreadyAttacked;
     public GameObject projectile;
 
-    //States
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
@@ -49,9 +44,8 @@ public class PlayerControllerBlue : MonoBehaviour
     {
         UpdatePlayerTarget();
         if(player != null){
-        //Check for sight and attack range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, IsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, IsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
@@ -61,27 +55,25 @@ public class PlayerControllerBlue : MonoBehaviour
 
     private void Patroling()
     {
-        if (!walkPointSet) SearchWalkPoint();
+        if (!wpSet) Searchwp();
 
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
+        if (wpSet)
+            agent.SetDestination(wp);
 
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+        Vector3 distanceTowp = transform.position - wp;
 
-        //Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
+        if (distanceTowp.magnitude < 1f)
+            wpSet = false;
     }
-    private void SearchWalkPoint()
+    private void Searchwp()
     {
-        //Calculate random point in range
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        float randomZ = Random.Range(-wpRange, wpRange);
+        float randomX = Random.Range(-wpRange, wpRange);
 
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        wp = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            walkPointSet = true;
+        if (Physics.Raycast(wp, -transform.up, 2f, IsGround))
+            wpSet = true;
     }
 
     private void ChasePlayer()
@@ -92,22 +84,19 @@ public class PlayerControllerBlue : MonoBehaviour
     private void AttackPlayer()
     {
 
-        //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
 
         transform.LookAt(player);
 
         if (!alreadyAttacked)
         {
-            ///Attack code here
             Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 40f, ForceMode.Impulse);
             rb.AddForce(transform.up * 3f, ForceMode.Impulse);
-            ///End of attack code
 
             alreadyAttacked = true;
             
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            Invoke(nameof(ResetAttack), AttackDelay);
              
         }
     }

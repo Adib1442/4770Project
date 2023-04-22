@@ -10,21 +10,16 @@ public class PlayerController : MonoBehaviour
     public Transform payload;
 
 
-    public LayerMask whatIsGround, whatIsPlayer, IsPayload;
+    public LayerMask IsGround, IsPlayer, IsPayload;
 
-    public float health;
-
-    //Patroling
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
 
-    //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
     public GameObject projectile;
 
-    //States
     public float sightRange, attackRange, payloadSightRange, escortRange;
     public bool playerInSightRange, playerInAttackRange, payloadInSightRange, payloadInEscortRange;
 
@@ -47,10 +42,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         UpdatePlayerTarget();
-        //Check for sight and attack range
          if(player != null){
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, IsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, IsPlayer);
         payloadInSightRange = Physics.CheckSphere(transform.position, payloadSightRange, IsPayload);
         payloadInEscortRange = Physics.CheckSphere(transform.position, escortRange, IsPayload);
 
@@ -84,19 +78,17 @@ public class PlayerController : MonoBehaviour
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        //Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
     }
     private void SearchWalkPoint()
     {
-        //Calculate random point in range
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, IsGround))
             walkPointSet = true;
     }
 
@@ -107,18 +99,16 @@ public class PlayerController : MonoBehaviour
 
     private void AttackPlayer()
     {
-        //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
 
         transform.LookAt(player);
 
         if (!alreadyAttacked)
         {
-            ///Attack code here
             Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 40f, ForceMode.Impulse);
             rb.AddForce(transform.up * 3f, ForceMode.Impulse);
-            ///End of attack code
+
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
